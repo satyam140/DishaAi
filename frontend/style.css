@@ -1,0 +1,371 @@
+/* style.css (Attractive New Design) */
+
+/* --- FONT IMPORT --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* --- ROOT VARIABLES --- */
+:root {
+    --primary-glow: rgba(74, 144, 226, 0.5);
+    --secondary-glow: rgba(142, 68, 173, 0.5);
+    --text-color: #EAEAEA;
+    --text-muted: #A0A0A0;
+    --card-bg: rgba(22, 22, 32, 0.6);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* --- GLOBAL STYLES --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #11111b, #2c3e50);
+    color: var(--text-color);
+    line-height: 1.7;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* --- PAGE CONTAINER & ANIMATIONS --- */
+.page-section {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+    padding: 2rem;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+.page-section.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- AUTH & FORM CARDS (GLASSMORPHISM) --- */
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 32px 0 var(--shadow-color);
+    width: 100%;
+}
+
+.form-card {
+    max-width: 500px;
+}
+
+.card h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    background: linear-gradient(90deg, #4A90E2, #8E44AD);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"] {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus {
+    outline: none;
+    border-color: #4A90E2;
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.cta-button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(90deg, #4A90E2, #8E44AD);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 20px var(--secondary-glow);
+}
+
+.cta-button:disabled {
+    background: #555;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--text-muted);
+}
+
+.auth-link a {
+    color: #4A90E2;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.auth-link a:hover {
+    color: #8E44AD;
+}
+
+/* --- MAIN APP PAGE --- */
+.main-wrapper {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.hero {
+    text-align: center;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.hero .highlight {
+    background: linear-gradient(90deg, #4A90E2, #8E44AD);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero .subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+}
+
+.logout-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #4A90E2;
+    color: white;
+    border-color: #4A90E2;
+}
+
+.card-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+#career-form .card-body {
+    flex: 1;
+    min-width: 300px;
+}
+
+.results-container {
+    flex: 1.5;
+    min-width: 300px;
+}
+
+.initial-message, .loading, .error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
+    padding: 2rem;
+    border-radius: 15px;
+    height: 100%;
+    min-height: 200px;
+    color: var(--text-muted);
+    background: var(--card-bg);
+    border: 1px dashed var(--border-color);
+}
+
+.initial-message i, .loading i, .error i {
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, #4A90E2, #8E44AD);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.recommendation-card {
+    background: var(--card-bg);
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #4A90E2, #8E44AD) 1;
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recommendation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px var(--primary-glow);
+}
+
+.recommendation-card h3 {
+    margin-top: 0;
+    color: #4A90E2;
+    font-size: 1.6rem;
+}
+
+.recommendation-card p {
+    color: var(--text-muted);
+}
+
+.skills-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.skills-list li {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    margin: 0.3rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+/* --- FILTER SEARCH BAR --- */
+.search-container {
+    display: none; /* Hidden by default, shown with JS */
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.search-container i {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+#search-bar {
+    width: 100%;
+    padding: 1rem 1rem 1rem 40px; /* Left padding for icon */
+}
+
+/* --- NEW: LIVE SEARCH STYLES --- */
+.live-search-container {
+    position: relative;
+    max-width: 700px;
+    margin: 2rem auto 0;
+}
+
+#live-search-bar {
+    width: 100%;
+    padding: 1.2rem 1.2rem 1.2rem 50px;
+    font-size: 1.1rem;
+    border-radius: 50px; /* Pill shape */
+}
+
+.live-search-container i {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1.2rem;
+}
+
+#live-search-results-container {
+    padding: 0 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.live-result-card {
+    background: var(--card-bg);
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #8E44AD, #4A90E2) 1; /* Reversed gradient */
+    padding: 1.5rem 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    animation: fadeIn 0.5s;
+}
+
+.live-result-card h3 {
+    margin-top: 0;
+    color: #8E44AD; /* Purple highlight for query */
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+}
+
+.live-result-card p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+    .card-section {
+        flex-direction: column;
+    }
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+}
+

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PathFinder AI - Your Career Compass</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <section id="login-page" class="page-section">
+        <div class="main-wrapper" style="max-width: 500px;">
+            <div class="card form-card">
+                <h2>Welcome Back!</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="cta-button">Log In</button>
+                </form>
+                 <p class="auth-link">
+                    Don't have an account? <a href="#" id="show-signup">Sign Up</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="signup-page" class="page-section">
+        <div class="main-wrapper" style="max-width: 500px;">
+            <div class="card form-card">
+                <h2>Create Your Account</h2>
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" required>
+                    </div>
+                    <button type="submit" class="cta-button">Sign Up</button>
+                </form>
+                <p class="auth-link">
+                    Already have an account? <a href="#" id="show-login">Log In</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="details-page" class="page-section">
+         <div class="main-wrapper" style="max-width: 600px;">
+            <div class="card form-card">
+                <h2>Tell Us About Yourself</h2>
+                <p>This information helps us provide more accurate recommendations.</p>
+                <form id="details-form">
+                    <div class="form-group">
+                        <label>10th Grade (Board & Percentage/CGPA)</label>
+                        <input type="text" id="grade10" placeholder="e.g., CBSE, 95%" required>
+                    </div>
+                    <div class="form-group">
+                        <label>12th Grade (Stream & Percentage/CGPA)</label>
+                        <input type="text" id="grade12" placeholder="e.g., Science, 92%" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Graduation (Degree, Major & Score)</label>
+                        <input type="text" id="graduation" placeholder="e.g., B.Tech in CSE, 8.5 CGPA" required>
+                    </div>
+                    <button type="submit" class="cta-button">Save & Find My Career</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="main-app-page" class="page-section">
+        <div class="main-wrapper">
+            <header class="hero">
+                <div class="hero-content">
+                    <h1>Your Personalized <span class="highlight">Career Compass</span> 🧭</h1>
+                    <p class="subtitle">Get recommendations below, or ask a question to start exploring.</p>
+                    
+                    <!-- This is the new live search bar -->
+                    <div class="live-search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="search" id="live-search-bar" placeholder="Ask anything about careers, e.g., 'What is DevOps?'">
+                    </div>
+
+                    <a href="#" id="logout-button" class="logout-btn">Log Out</a>
+                </div>
+            </header>
+
+            <!-- This new container will show the live search results -->
+            <div id="live-search-results-container"></div>
+
+            <section class="card-section">
+                <div class="card form-card">
+                    <h2>Refine Your Profile</h2>
+                    <form id="career-form">
+                        <div class="form-group">
+                            <label for="skills"><i class="fas fa-tools icon"></i> Your Skills & Strengths</label>
+                            <input type="text" id="skills" placeholder="e.g., Creative Writing, JavaScript, Public Speaking" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="interests"><i class="fas fa-heart icon"></i> Your Hobbies & Interests</label>
+                            <input type="text" id="interests" placeholder="e.g., Video Games, Hiking, Ancient History" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="personality"><i class="fas fa-user-circle icon"></i> Your Personality Traits</label>
+                            <input type="text" id="personality" placeholder="e.g., Introverted, Analytical, Collaborative" required>
+                        </div>
+                        <button type="submit" id="submit-btn" class="cta-button">
+                            <i class="fas fa-magic"></i> Get Recommendations
+                        </button>
+                    </form>
+                </div>
+                <div id="results-container" class="results-container">
+                    <!-- This is the filter search bar for recommendations -->
+                    <div id="search-container" class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="search" id="search-bar" placeholder="Search in your results...">
+                    </div>
+                    
+                    <!-- The recommendation results will be rendered inside this div -->
+                    <div id="dynamic-results-content">
+                        <div class="initial-message">
+                            <i class="fas fa-lightbulb"></i> Your personalized career insights will appear here.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
