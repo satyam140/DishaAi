@@ -1,8 +1,8 @@
-// backend/index.js
+// backend/index.js (Modified for Vercel Deployment)
 
 import path from 'path';
 import { fileURLToPath } from 'url';
-import open from 'open';
+// The 'open' package is removed as it's not needed for deployment
 import express from 'express';
 import cors from 'cors';
 import bcrypt from 'bcrypt';
@@ -14,8 +14,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = 3001;
-const JWT_SECRET = 'your-super-secret-key-for-the-hackathon'; // Change this to a random string
 
 // --- Middleware ---
 app.use(cors());
@@ -30,10 +28,9 @@ setupDatabase().then(database => {
   db = database;
 }).catch(console.error);
 
-// --- AI Configuration ---
-// IMPORTANT: Replace with your NEW Google AI API key
+// --- Secure Configuration using Environment Variables ---
 const API_KEY = "AIzaSyDa-scXo-wlDTCk28XJ2CYe1JJVONg3Ts4";
-// Using the model that we confirmed works
+const JWT_SECRET = process.env.JWT_SECRET;
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
 
@@ -133,11 +130,9 @@ app.post('/recommend', verifyToken, async (req, res) => {
   const { skills, interests, personality } = req.body;
 
   try {
-    // Fetch the user's academic details from the database
     const user = await db.get('SELECT academic_details FROM users WHERE id = ?', req.userId);
     const academicDetails = user.academic_details ? JSON.parse(user.academic_details) : {};
     
-    // Create the enhanced prompt for the AI
     const prompt = `
       You are an expert career counselor AI named PathFinder.
       A user has provided their profile. Your task is to act as a helpful guide and suggest 3 distinct and well-suited career paths.
@@ -153,25 +148,15 @@ app.post('/recommend', verifyToken, async (req, res) => {
 
       For each of the 3 recommendations, you must provide:
       1.  **title**: The job title.
-      2.  **description**: A detailed, 2-3 sentence paragraph explaining why this career is a great fit for the user's profile, directly mentioning their skills, interests, and academic background.
-      3.  **skills_to_learn**: A list of 3-4 specific, crucial skills the user should focus on learning to enter this field.
+      2.  **description**: A detailed, 2-3 sentence paragraph explaining why this career is a great fit for the user's profile.
+      3.  **skills_to_learn**: A list of 3-4 specific, crucial skills the user should focus on learning.
 
       Please provide the output ONLY in a valid JSON array format, like this:
-      [
-        {
-          "title": "...",
-          "description": "...",
-          "skills_to_learn": ["Skill A", "Skill B", "Skill C"]
-        }
-      ]
+      [ { "title": "...", "description": "...", "skills_to_learn": ["..."] } ]
     `;
 
-    // Prepare the request payload for the Google AI API
-    const payload = {
-      contents: [{ parts: [{ text: prompt }] }]
-    };
+    const payload = { contents: [{ parts: [{ text: prompt }] }] };
 
-    // Call the Google AI API
     const apiResponse = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -186,7 +171,6 @@ app.post('/recommend', verifyToken, async (req, res) => {
 
     const data = await apiResponse.json();
     
-    // Extract, clean, and parse the AI's response
     const aiResponseText = data.candidates[0].content.parts[0].text;
     const cleanedJsonText = aiResponseText.replaceAll('```json', '').replaceAll('```', '').trim();
     const recommendations = JSON.parse(cleanedJsonText);
@@ -199,8 +183,6 @@ app.post('/recommend', verifyToken, async (req, res) => {
   }
 });
 
-// --- ADD THIS NEW ENDPOINT to backend/index.js ---
-
 // 5. LIVE SEARCH Endpoint (Protected)
 app.post('/live-search', verifyToken, async (req, res) => {
   const { query } = req.body;
@@ -210,7 +192,6 @@ app.post('/live-search', verifyToken, async (req, res) => {
   }
 
   try {
-    // Create a new, specific prompt for a single question
     const prompt = `
       You are a helpful and concise career encyclopedia AI.
       A user has a specific question about a career or skill.
@@ -221,9 +202,7 @@ app.post('/live-search', verifyToken, async (req, res) => {
       Your Answer:
     `;
 
-    const payload = {
-      contents: [{ parts: [{ text: prompt }] }]
-    };
+    const payload = { contents: [{ parts: [{ text: prompt }] }] };
 
     const apiResponse = await fetch(API_URL, {
       method: 'POST',
@@ -246,11 +225,5 @@ app.post('/live-search', verifyToken, async (req, res) => {
   }
 });
 
-
-// --- Start the Server ---
-app.listen(PORT, () => {
-  const url = `http://localhost:${PORT}`;
-  console.log(`🚀 Server is running on ${url}`);
-  console.log('Opening the app in your browser...');
-  open(url); // This will open the browser
-});
+// --- Export the app for Vercel ---
+export default app;
