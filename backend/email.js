@@ -1,19 +1,24 @@
-// backend/email.js
-
 import nodemailer from 'nodemailer';
 
-// Configure the email transporter using your Gmail account
+// Configure the email transporter using Environment Variables for security
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'YOUR_GMAIL_ADDRESS@gmail.com', // Replace with your email
-    pass: 'YOUR_16_CHARACTER_APP_PASSWORD'  // Replace with the App Password you generated
+    // These values will be securely provided by Vercel, not stored in the code
+    user: process.env.GMAIL_ADDRESS, 
+    pass: process.env.GMAIL_APP_PASSWORD
   }
 });
 
 export async function sendWelcomeEmail(userEmail, userName) {
+  // Check if the email credentials are configured before trying to send
+  if (!process.env.GMAIL_ADDRESS || !process.env.GMAIL_APP_PASSWORD) {
+    console.log('Email credentials not configured. Skipping welcome email.');
+    return; // Stop the function if credentials aren't set
+  }
+
   const mailOptions = {
-    from: '"PathFinder AI" <YOUR_GMAIL_ADDRESS@gmail.com>', // Replace with your email
+    from: `"PathFinder AI" <${process.env.GMAIL_ADDRESS}>`, // Dynamically use the sender email
     to: userEmail,
     subject: 'Welcome to PathFinder AI! 🚀',
     html: `
