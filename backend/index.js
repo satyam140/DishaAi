@@ -30,7 +30,7 @@ setupDatabase().then(database => {
 
 // --- Secure Configuration using Environment Variables ---
 const API_KEY = "AIzaSyDa-scXo-wlDTCk28XJ2CYe1JJVONg3Ts4";
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = a9$F!z&k0@7G*H#b5s2Lp^n8!q@wE$rT;
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
 
